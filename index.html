@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marikiti Fresh – Market groceries delivered</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f6ef;--ink:#17301f;--muted:#5b6b5f;--card:#fff;--line:#d9dccb;--green:#1f6b36;--sun:#f6c026;--tom:#d4372a;--on-green:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a14;--ink:#eef2e6;--muted:#9fb0a2;--card:#1a271e;--line:#2c3d31;--green:#3c9b57}}
+:root[data-theme="dark"]{--bg:#111a14;--ink:#eef2e6;--muted:#9fb0a2;--card:#1a271e;--line:#2c3d31;--green:#3c9b57}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Figtree,system-ui,sans-serif}
+h1,h2,h3,.brand{font-family:"Bricolage Grotesque",Georgia,sans-serif;margin:0}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--tom);outline-offset:2px}
+header{background:var(--sun);color:#17301f;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;border-bottom:4px solid #17301f}
+.brand{font-size:1.5rem;font-weight:800}
+.cartbtn{background:#17301f;color:#fff;border:0;border-radius:999px;padding:9px 18px;font-weight:600}
+.hero{max-width:1100px;margin:0 auto;padding:48px 20px 24px}
+.hero h1{font-size:clamp(2.2rem,7vw,4.2rem);line-height:1;font-weight:800;max-width:14ch}
+.hero p{max-width:52ch;color:var(--muted);font-size:1.1rem;margin:16px 0 0}
+.tabs{max-width:1100px;margin:0 auto;padding:12px 20px;display:flex;gap:8px;flex-wrap:wrap}
+.tab{border:2px solid var(--ink);background:transparent;color:var(--ink);border-radius:999px;padding:6px 16px;font-weight:600}
+.tab[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--on-green)}
+.grid{max-width:1100px;margin:0 auto;padding:8px 20px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column}
+.emo{font-size:3rem;line-height:1}
+.item h3{font-size:1.1rem;margin-top:10px}
+.unit{color:var(--muted);font-size:.9rem}
+.row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:14px}
+.price{background:var(--tom);color:#fff;font-weight:600;padding:3px 10px;border-radius:4px}
+.add{background:var(--green);color:var(--on-green);border:0;border-radius:6px;padding:8px 14px;font-weight:600}
+aside{position:fixed;top:0;right:0;height:100%;width:min(400px,100%);background:var(--card);border-left:4px solid #17301f;transform:translateX(105%);transition:transform .25s;z-index:10;display:flex;flex-direction:column;overflow-y:auto;padding:20px;padding-top:calc(20px + env(safe-area-inset-top,0px));padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+aside.open{transform:none}
+.lines{margin:14px 0}
+.line{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.line b{flex:1}
+.q{display:flex;align-items:center;gap:8px}
+.q button{width:28px;height:28px;border-radius:50%;border:1px solid var(--ink);background:none;color:var(--ink)}
+.total{display:flex;justify-content:space-between;font-weight:800;font-size:1.2rem;margin-bottom:12px}
+.field{width:100%;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit;margin-bottom:10px}
+.order{display:block;text-align:center;background:var(--green);color:var(--on-green);padding:12px;border-radius:6px;font-weight:600;text-decoration:none}
+.order[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.close{align-self:flex-end;background:none;border:0;color:var(--ink);font-size:1.6rem}
+.empty{color:var(--muted)}
+:root{--green:#00a082;--sun:#ffc244}
+header{border-bottom:0;border-radius:0 0 20px 20px}
+.hero{padding-top:28px}.hero h1{font-size:clamp(1.9rem,5vw,2.9rem)}
+.search{max-width:1100px;margin:0 auto;padding:0 20px}.search input{width:100%;padding:14px 18px;border:0;border-radius:14px;background:var(--card);color:var(--ink);font:inherit;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+.tab{border:0;background:var(--card);color:var(--ink);box-shadow:0 1px 6px rgba(0,0,0,.1)}
+.item{border:0;border-radius:18px;box-shadow:0 2px 12px rgba(0,0,0,.09)}
+.ph{height:120px;border-radius:12px;background:#fff1c9;display:flex;align-items:center;justify-content:center;overflow:hidden}.ph img{width:100%;height:100%;object-fit:cover}
+.price{background:none;color:var(--ink);font-weight:800;padding:0;font-size:1.1rem}
+.add{width:38px;height:38px;border-radius:50%;padding:0;font-size:1.5rem;line-height:1;background:var(--sun);color:#17301f}
+.cartbtn{background:var(--green)}
+.grid{padding-bottom:110px}
+.bar{position:fixed;left:16px;right:16px;max-width:520px;margin:0 auto;bottom:calc(14px + env(safe-area-inset-bottom,0px));background:var(--green);color:#fff;border:0;border-radius:16px;padding:14px 18px;font-weight:600;display:flex;justify-content:space-between;z-index:4;box-shadow:0 6px 20px rgba(0,0,0,.25)}.bar[hidden]{display:none}
+.seg{display:flex;gap:6px;margin-bottom:8px}.segb{flex:1;padding:10px;border-radius:12px;border:2px solid var(--line);background:none;color:var(--ink);font-weight:600}.segb.on{border-color:var(--green);background:var(--green);color:#fff}
+a.locbtn{display:block;text-align:center;text-decoration:none}a.locbtn[hidden]{display:none}button.order{width:100%;border:0;font:inherit;font-weight:600;cursor:pointer}
+.item .q button{width:34px;height:34px;font-size:1.2rem}.item .q .add{background:var(--sun);color:#17301f;border-color:var(--sun)}.item .q span{min-width:1.2em;text-align:center;font-weight:600}
+.slide{background:var(--green);color:#fff;overflow:hidden;white-space:nowrap;padding:8px 0;font-weight:600}.track{display:flex;width:max-content;animation:slide 45s linear infinite}.track span{padding-right:3rem}@keyframes slide{to{transform:translateX(-50%)}}
+aside>*{flex-shrink:0}.sub{display:block;font-weight:600;margin:10px 0 4px}.sum div{display:flex;justify-content:space-between;color:var(--muted);font-size:.95rem}.locbtn{width:100%;margin-bottom:10px;padding:9px;border:2px solid var(--green);background:none;color:var(--ink);border-radius:6px;font-weight:600}.ex{display:flex;align-items:center;gap:10px;padding:6px 0}.ex b{flex:1;font-weight:600}
+.pay{background:var(--bg);border:2px dashed var(--green);border-radius:8px;padding:10px 12px;margin-bottom:10px}.pay p{margin:4px 0 0;font-size:.95rem}
+footer{border-top:4px solid #17301f;background:var(--sun);color:#17301f;padding:24px 20px;text-align:center}
+@media (prefers-reduced-motion:reduce){aside{transition:none}.track{animation:none;width:auto;white-space:normal;justify-content:center}.track span:nth-child(n+2){display:none}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+</head>
+<body>
+<header>
+  <span class="brand">Marikiti Fresh</span>
+  <button class="cartbtn" id="open">Cart (<span id="count">0</span>)</button>
+</header>
+<div class="slide" role="note"><div class="track" id="track"></div></div>
+
+<section class="hero">
+  <h1>Marikiti prices, at your door.</h1>
+  <p>Vegetables, fruit and staples picked at Marikiti market. Add what you need, pay with Pochi la Biashara and place your order here. We deliver countrywide, or you can pick up at the market.</p>
+</section>
+
+<div class="search"><input id="q" type="search" placeholder="Search Marikiti: tomatoes, managu, omena..." aria-label="Search products"></div>
+<nav class="tabs" id="tabs" aria-label="Categories"></nav>
+<main class="grid" id="grid"></main>
+
+<button class="bar" id="bar" hidden></button>
+
+<aside id="cart" aria-label="Your cart">
+  <button class="close" id="close" aria-label="Close cart">&times;</button>
+  <h2>Your cart</h2>
+  <div class="lines" id="lines"></div>
+  <span class="sub">Extras</span>
+  <div id="extras"></div>
+  <span class="sub">How do you want your order?</span>
+  <div class="seg"><button type="button" class="segb on" id="mDel" data-mode="delivery">Delivery</button><button type="button" class="segb" id="mPick" data-mode="pickup">Self pickup</button></div>
+  <div id="delbox"><label class="sub" for="zone">Delivery area</label>
+  <select class="field" id="zone"><option value="">Choose your area</option><optgroup label="Within Nairobi (KES 200)"><option value="200">Nairobi CBD</option><option value="200">Westlands</option><option value="200">Kilimani</option><option value="200">Kileleshwa</option><option value="200">Lavington</option><option value="200">Karen</option><option value="200">Langata</option><option value="200">South B</option><option value="200">South C</option><option value="200">Embakasi</option><option value="200">Donholm</option><option value="200">Eastleigh</option><option value="200">Kasarani</option><option value="200">Roysambu</option><option value="200">Ruaraka</option><option value="200">Githurai</option></optgroup><optgroup label="Outside Nairobi, countrywide (KES 500)"><option value="500">Thika</option><option value="500">Ruiru</option><option value="500">Juja</option><option value="500">Kiambu</option><option value="500">Ruaka</option><option value="500">Kikuyu</option><option value="500">Limuru</option><option value="500">Ngong</option><option value="500">Rongai</option><option value="500">Kitengela</option><option value="500">Athi River</option><option value="500">Machakos</option><option value="500">Nakuru</option><option value="500">Nyeri</option><option value="500">Eldoret</option><option value="500">Kisumu</option><option value="500">Mombasa</option><option value="500">Other town (type it in the address)</option></optgroup></select></div>
+  <p class="unit" id="pickinfo" hidden>Pick up at Marikiti market, Nairobi. No delivery fee. We will message you when your order is ready.</p>
+  <div class="sum"><div><span>Groceries</span><span id="sub">KES 0</span></div><div><span id="svcl">Service fee</span><span id="svc">KES 0</span></div><div><span>Transport</span><span id="trn">KES 0</span></div><div><span>Gunias</span><span id="pk">KES 0</span></div></div>
+  <div class="total"><span>Total</span><span id="total">KES 0</span></div>
+  <input class="field" id="name" placeholder="Your name" autocomplete="name">
+  <input class="field" id="phone" type="tel" placeholder="Phone number" autocomplete="tel">
+  <div id="locbox">
+  <span class="sub">Delivery location</span>
+  <input class="field" id="addr" placeholder="Street, estate or building" autocomplete="street-address">
+  <input class="field" id="lmk" placeholder="Landmark, e.g. near Total petrol station">
+  <button class="locbtn" id="loc" type="button">📍 Use my current location</button>
+  <button class="locbtn" id="find" type="button">🔎 Find this place on the map</button>
+  <div id="map" style="height:230px;border-radius:12px;margin-bottom:10px"></div>
+  <input class="field" id="pin" placeholder="Map pin (fills in when you tap the map)">
+  </div>
+  <div class="pay"><b>Pay with Pochi la Biashara</b><p>Send <b id="payamt">KES 0</b> to <b>0725171496</b>, then enter the M-Pesa confirmation code below.</p></div>
+  <input class="field" id="code" placeholder="M-Pesa confirmation code" autocomplete="off">
+  <button class="order" id="order" type="button" aria-disabled="true">Place order</button>
+  <p class="unit" id="status" role="status"></p>
+  <a class="locbtn" id="wa" href="#" hidden>Send on WhatsApp instead</a>
+</aside>
+
+<footer>Marikiti Fresh · Nairobi · Prices change with the market each day.</footer>
+
+<script>
+var PHONE="254725171496"; // WhatsApp Business
+var P=[
+["Tomatoes","🍅","Vegetables","kg",120],["Onions","🧅","Vegetables","kg",100],["Sukuma wiki (big bunch)","🥬","Vegetables","big bunch",30],["Sukuma wiki (small bunch)","🥬","Vegetables","small bunch",5],
+["Spinach (big bunch)","🥬","Vegetables","big bunch",40],["Spinach (small bunch)","🥬","Vegetables","small bunch",5],["Cabbage","🥦","Vegetables","head",60],["Carrots","🥕","Vegetables","kg",90],
+["Irish potatoes","🥔","Vegetables","kg",80],["Capsicum","🫑","Vegetables","kg",200],["Garlic","🧄","Vegetables","100g",50],
+["Nduma (arrow roots)","🥔","Vegetables","kg",130],["Ngwashe (sweet potatoes)","🍠","Vegetables","kg",90],["Terere (big bunch)","🌿","Vegetables","big bunch",40],["Terere (small bunch)","🌿","Vegetables","small bunch",5],["Terere ndogo (big bunch)","🌿","Vegetables","big bunch",40],["Terere ndogo (small bunch)","🌿","Vegetables","small bunch",5],
+["Managu (big bunch)","🌿","Vegetables","big bunch",40],["Managu (small bunch)","🌿","Vegetables","small bunch",5],["Kanzera (big bunch)","🌿","Vegetables","big bunch",40],["Kanzera (small bunch)","🌿","Vegetables","small bunch",5],["Sagaa (big bunch)","🌿","Vegetables","big bunch",40],["Sagaa (small bunch)","🌿","Vegetables","small bunch",5],
+["Sukuma matumbo (big bunch)","🥬","Vegetables","big bunch",40],["Sukuma matumbo (small bunch)","🥬","Vegetables","small bunch",5],["Dhania","🌿","Vegetables","3 pcs",20],["Green onion grass","🌱","Vegetables","bunch",20],
+["Chilli","🌶️","Vegetables","100g",40],["Tangawizi (ginger)","🫚","Vegetables","100g",50],["Green peas","🫛","Vegetables","kg",200],
+["Matoke (green banana)","🍌","Bananas","bunch",250],["Ripe banana (yellow)","🍌","Bananas","bunch",150],
+["Ripe banana (green)","🍌","Bananas","bunch",150],["Sweet banana","🍌","Bananas","bunch",200],["Sweet red banana","🍌","Bananas","bunch",250],
+["Lemons","🍋","Fruits","kg",200],
+["Apples","🍎","Fruits","piece",35],["Passion fruits","🟣","Fruits","kg",300],["Yellow passion","🟡","Fruits","kg",250],["Mangoes","🥭","Fruits","kg",150],["Avocados","🥑","Fruits","each",25],
+["Oranges","🍊","Fruits","kg",140],["Pineapple","🍍","Fruits","each",120],["Watermelon","🍉","Fruits","kg",50],
+["Rice","🍚","Staples","kg",180],["Maize flour (unga)","🌽","Staples","2kg",150],["Beans","🫘","Staples","kg",200],
+["Green grams","🫛","Staples","kg",220],["Eggs","🥚","Staples","tray",450],["Omena (dagaa)","🐟","Staples","gorogoro",450],
+["Maize, cobless (shelled)","🌽","Cereals","gorogoro",130],["Maize, intact (on the cob)","🌽","Cereals","cob",20],
+["Millet (wimbi)","🌾","Cereals","kg",120],["Sorghum","🌾","Cereals","kg",100],["Wheat","🌾","Cereals","kg",90],["Oats","🌾","Cereals","500g",120]
+];
+var cat="All",cart={},gcart={},mode="delivery",sq="",IMG={},G=[["Small gunia",35],["Big gunia",50],["Extra big gunia",80]];
+function kes(n){return "KES "+n.toLocaleString("en-KE")}
+function tabs(){var c=["All","Vegetables","Fruits","Bananas","Cereals","Staples"];
+  document.getElementById("tabs").innerHTML=c.map(function(x){return '<button class="tab" aria-pressed="'+(x===cat)+'" data-c="'+x+'">'+x+'</button>'}).join("")}
+function grid(){document.getElementById("grid").innerHTML=P.map(function(p,i){
+  if((cat!=="All"&&p[2]!==cat)||(sq&&p[0].toLowerCase().indexOf(sq)<0))return"";
+  return '<div class="item"><div class="ph">'+(IMG[p[0]]?'<img src="'+IMG[p[0]]+'" alt="'+p[0]+'">':'<span class="emo" aria-hidden="true">'+p[1]+'</span>')+'</div><h3>'+p[0]+'</h3><div class="unit">per '+p[3]+'</div><div class="row"><span class="price">'+kes(p[4])+'</span><div class="q"><button data-d="'+i+'" aria-label="Remove one '+p[0]+'">&minus;</button><span id="cq'+i+'">'+(cart[i]||0)+'</span><button class="add" data-i="'+i+'" aria-label="Add '+p[0]+'">+</button></div></div></div>'}).join("")}
+function render(){
+  var ids=Object.keys(cart),n=0,t=0,gk=Object.keys(gcart),gt=0;
+  var h=ids.map(function(i){var p=P[i],q=cart[i];n+=q;t+=q*p[4];
+    return '<div class="line"><b>'+p[0]+'<div class="unit">'+kes(p[4])+' / '+p[3]+'</div></b><div class="q"><button data-m="'+i+'" aria-label="Remove one">&minus;</button>'+q+'<button data-p="'+i+'" aria-label="Add one">+</button></div></div>'}).join("");
+  document.getElementById("lines").innerHTML=h||'<p class="empty">Your cart is empty. Add something fresh.</p>';
+  document.getElementById("count").textContent=n;
+  var rate=t>1000?0.3:0.2,sv=n?Math.round(t*rate):0,tr=(n&&mode=="delivery")?+document.getElementById("zone").value:0;
+  gk.forEach(function(k){gt+=gcart[k]*G[k][1]});
+  var all=n?t+sv+tr+gt:0;
+  document.getElementById("sub").textContent=kes(t);
+  document.getElementById("svcl").textContent="Service fee ("+Math.round(rate*100)+"%)";
+  document.getElementById("svc").textContent=kes(sv);
+  document.getElementById("trn").textContent=kes(tr);
+  document.getElementById("pk").textContent=kes(gt);
+  document.getElementById("total").textContent=kes(all);
+  document.getElementById("payamt").textContent=kes(all);
+  document.getElementById("extras").innerHTML=G.map(function(g,k){return '<div class="ex"><b>'+g[0]+'<div class="unit">'+kes(g[1])+' each</div></b><div class="q"><button data-gm="'+k+'" aria-label="Remove one">&minus;</button>'+(gcart[k]||0)+'<button data-gp="'+k+'" aria-label="Add one">+</button></div></div>'}).join("");
+  document.getElementById("mDel").classList.toggle("on",mode=="delivery");
+  document.getElementById("mPick").classList.toggle("on",mode=="pickup");
+  document.getElementById("delbox").hidden=mode=="pickup";
+  document.getElementById("locbox").hidden=mode=="pickup";
+  document.getElementById("pickinfo").hidden=mode!="pickup";
+  var bar=document.getElementById("bar");bar.hidden=!n;
+  bar.innerHTML="<span>View cart · "+n+" item"+(n>1?"s":"")+"</span><span>"+kes(all)+"</span>";
+  P.forEach(function(p,i){var e=document.getElementById("cq"+i);if(e)e.textContent=cart[i]||0});
+  
+  var o=document.getElementById("order");
+  if(!n){o.setAttribute("aria-disabled","true");o.href="#";return}
+  var nm=document.getElementById("name").value,ad=document.getElementById("addr").value,cd=document.getElementById("code").value,pn=document.getElementById("pin").value,zn=document.getElementById("zone").selectedOptions[0].text,ph=document.getElementById("phone").value,lm=document.getElementById("lmk").value;
+  var msg="Hello Marikiti Fresh, I would like to order:\n"+ids.map(function(i){return "- "+cart[i]+" x "+P[i][0]+" ("+P[i][3]+")"}).join("\n")+(gk.length?"\n"+gk.map(function(k){return "- "+gcart[k]+" x "+G[k][0]}).join("\n"):"")+"\nGroceries: "+kes(t)+"\nService fee: "+kes(sv)+"\n"+(mode=="pickup"?"SELF PICKUP (no delivery fee)":"Delivery area: "+zn+"\nTransport: "+kes(tr))+"\nTOTAL: "+kes(all)+"\nName: "+nm+"\nPhone: "+ph+(mode=="pickup"?"":"\nAddress: "+ad+(lm?"\nLandmark: "+lm:"")+(pn?"\nLocation pin: "+pn:""))+"\nPaid via Pochi la Biashara (0725171496), M-Pesa code: "+cd;
+  lastMsg=msg;document.getElementById("wa").href="https://wa.me/"+PHONE+"?text="+encodeURIComponent(msg);
+  o.setAttribute("aria-disabled",(nm&&ph&&(mode=="pickup"||(ad&&document.getElementById("zone").value))&&cd)?"false":"true")}
+document.addEventListener("click",function(e){var d=e.target.dataset;
+  if(d.c){cat=d.c;tabs();grid()}
+  if(d.mode){mode=d.mode;render();setTimeout(function(){map.invalidateSize()},60)}
+  if(d.d!==undefined&&cart[d.d]){if(--cart[d.d]<=0)delete cart[d.d];render()}
+  if(d.i!==undefined){cart[d.i]=(cart[d.i]||0)+1;render()}
+  if(d.p!==undefined){cart[d.p]++;render()}
+  if(d.m!==undefined){if(--cart[d.m]<=0)delete cart[d.m];render()}
+  if(d.gp!==undefined){gcart[d.gp]=(gcart[d.gp]||0)+1;render()}
+  if(d.gm!==undefined){if((gcart[d.gm]=(gcart[d.gm]||0)-1)<=0)delete gcart[d.gm];render()}});
+document.getElementById("open").onclick=function(){document.getElementById("cart").classList.add("open")};
+document.getElementById("close").onclick=function(){document.getElementById("cart").classList.remove("open")};
+["name","phone","addr","lmk","code","pin"].forEach(function(id){document.getElementById(id).oninput=render});
+document.getElementById("zone").onchange=render;
+document.getElementById("q").oninput=function(){sq=this.value.toLowerCase().trim();grid()};
+document.getElementById("bar").onclick=function(){document.getElementById("cart").classList.add("open")};
+var m="🌙 Most preferred: order at night, get your items early next morning.  🚚 We deliver countrywide, all over Kenya.";
+document.getElementById("track").innerHTML=new Array(9).join("<span>"+m+"</span>");
+document.getElementById("loc").onclick=function(){var b=this;
+  if(!navigator.geolocation){b.textContent="Location not available. Paste a map link below.";return}
+  b.textContent="Finding you...";
+  navigator.geolocation.getCurrentPosition(function(r){setPin(r.coords.latitude,r.coords.longitude);if(!document.getElementById("addr").value)document.getElementById("addr").value="My current location (see pin)";b.textContent="📍 Location added. Tap to update";render()},function(){b.textContent="Couldn't get location. Paste a map link below."})};
+var map=L.map("map").setView([-1.2864,36.8172],11),mk;
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap contributors"}).addTo(map);
+function setPin(lat,lng,name){
+  if(mk)mk.setLatLng([lat,lng]);else mk=L.circleMarker([lat,lng],{radius:10,color:"#00a082",fillColor:"#ffc244",fillOpacity:1}).addTo(map);
+  map.setView([lat,lng],Math.max(map.getZoom(),15));
+  document.getElementById("pin").value="https://maps.google.com/?q="+lat.toFixed(6)+","+lng.toFixed(6);
+  render()}
+map.on("click",function(e){setPin(e.latlng.lat,e.latlng.lng)});
+document.getElementById("cart").addEventListener("transitionend",function(){map.invalidateSize()});
+document.getElementById("find").onclick=function(){var q=document.getElementById("addr").value+" "+document.getElementById("lmk").value;
+  if(!q.trim())return;
+  fetch("https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=ke&q="+encodeURIComponent(q)).then(function(r){return r.json()}).then(function(j){if(j[0])setPin(+j[0].lat,+j[0].lon);else alert("Place not found. Tap the map to drop your pin.")}).catch(function(){alert("Search unavailable. Tap the map to drop your pin.")})};
+var lastMsg="";
+function val(id){return document.getElementById(id).value}
+function sendOrder(){
+  var b=document.getElementById("order"),st=document.getElementById("status");
+  b.setAttribute("aria-disabled","true");st.textContent="Sending your order...";
+  var f={"form-name":"order",name:val("name"),phone:val("phone"),method:mode,area:mode=="pickup"?"Self pickup":document.getElementById("zone").selectedOptions[0].text,address:val("addr"),landmark:val("lmk"),pin:val("pin"),mpesa:val("code"),total:document.getElementById("total").textContent,order:lastMsg};
+  fetch("order.php",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:Object.keys(f).map(function(k){return encodeURIComponent(k)+"="+encodeURIComponent(f[k])}).join("&")})
+  .then(function(r){if(!r.ok)throw 0;cart={};gcart={};["name","phone","addr","lmk","pin","code"].forEach(function(id){document.getElementById(id).value=""});document.getElementById("wa").hidden=true;render();st.textContent="\u2705 Order received! We will confirm on your phone shortly."})
+  .catch(function(){st.textContent="Could not send automatically. Please send it on WhatsApp instead.";document.getElementById("wa").hidden=false;render()})}
+document.getElementById("order").onclick=function(){if(this.getAttribute("aria-disabled")!=="true")sendOrder()};
+tabs();grid();render();
+</script>
+</body>
+</html>
